@@ -1,0 +1,24 @@
+ int knapSack(int N, int W, int val[], int wt[])
+    {
+        // code here
+        map<int, int,greater <int>> ratio;
+        map<int, int> :: iterator it;
+        int total = 0;
+        for(int i = 0; i<N; i++){
+            ratio.insert({i,val[i]/wt[i]});
+            total += wt[i];
+        }
+        int newwt = 0;
+        int ans = 0;
+        for(it = ratio.begin(); it!=ratio.end(); it++){
+            int i = it->first;
+            if(newwt+wt[i]>W){
+                ans += ((W-newwt)/wt[i])*val[i];
+                // break;
+            }
+            else{
+                ans = ans + val[i];
+            }
+        }
+        return ans;
+    }
